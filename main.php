@@ -18,6 +18,10 @@ $monitor->attach($logger);
 $monitor->setState("ALTO");
 $monitor->setState("CRITICO");
 
+$monitor->detach($dashboard);
+
+$monitor->setState("NORMAL");
+
 
 /*
 
