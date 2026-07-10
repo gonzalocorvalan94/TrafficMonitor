@@ -38,9 +38,17 @@ class TrafficMonitor implements Subject
     }
 
     #[Override]
+    public function getState(): string
+    {
+        return $this->state;
+    }
+    
+    #[Override]
     public function notify(): void
     {
-        throw new \Exception('Not implemented');
+        foreach ($this->observers as $observer) {
+            $observer->update($this);
+        }
     }
 
     #[Override]
@@ -52,7 +60,7 @@ class TrafficMonitor implements Subject
     #[Override]
     public function detach(Observer $observer): void
     {
-        $this->observers = array_filter($this->observers, fn($value) => $value !== $observer);
+        $this->observers = array_filter($this->observers, fn ($value) => $value !== $observer);
     }
 
 }
